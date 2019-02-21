@@ -1,0 +1,30 @@
+body {
+    background-image: url("../images/atomic-wallpaper.jpg");
+}
+
+h1 {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: whitesmoke;
+    display: block;
+    float: right;
+    margin-right: 100px;
+    font-size: 300%;
+}
+
+p {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.character {
+    border: 3px solid purple;
+    overflow: auto;
+    clear: both;
+    background: whitesmoke;
+    display: inline-block;
+}
+
+#character-1-name, #character-2-name, #character-3-name, #character-4-name {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    display: block;
+    text-align: center;
+}
