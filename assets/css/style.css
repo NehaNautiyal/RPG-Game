@@ -8,22 +8,42 @@ h1 {
     display: block;
     float: right;
     margin-right: 100px;
-    font-size: 300%;
+    font-size: 5em;
 }
 
-p {
+h3 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: whitesmoke;
+    font-size: 3em;
 }
 
-.character {
+.btn {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    
+}
+
+.btn-primary {
+    background: plum;
+}
+
+.model {
     border: 3px solid purple;
     overflow: auto;
     clear: both;
     background: whitesmoke;
     display: inline-block;
 }
+.model-1, .model-2, .model-3, .model-4 {
+    position: relative;
+}
 
-#character-1-name, #character-2-name, #character-3-name, #character-4-name {
+#model-1-name, #model-2-name, #model-3-name, #model-4-name {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    display: block;
+    text-align: center;
+}
+
+#model-1-health, #model-2-health, #model-3-health, #model-4-health {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     display: block;
     text-align: center;
