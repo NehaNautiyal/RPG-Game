@@ -15,26 +15,37 @@ h3 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     color: whitesmoke;
     font-size: 3em;
+    position: relative;
 }
 
 .btn {
     font-family: 'Yanone Kaffeesatz', sans-serif;
+    border: teal;
+    position: relative;
     
 }
 
 .btn-primary {
     background: plum;
+    border: teal;
 }
 
-.model {
+.model-1, .model-2, .model-3, .model-4 {
     border: 3px solid purple;
     overflow: auto;
     clear: both;
     background: whitesmoke;
     display: inline-block;
-}
-.model-1, .model-2, .model-3, .model-4 {
     position: relative;
+    margin: 0 7px;
+}
+
+.model-1 {
+    margin-left: 20px;
+}
+
+h3, .btn {
+    margin-left: 5px;
 }
 
 #model-1-name, #model-2-name, #model-3-name, #model-4-name {

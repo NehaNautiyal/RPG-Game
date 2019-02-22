@@ -12,49 +12,54 @@
         crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-    <script src="assets/javascript/game.js"></script>
 </head>
 
 <body>
-    <h1>Atomic Models RPG Game</h1>
-
-    <div class="model">
-        <div id="model-1-name">Dalton's Solid Sphere</div>
-        <br>
-        <img class="model-1" src="assets/images/Dalton.png">
-        <div id="model-1-health">1803</div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Atomic Models RPG Game</h1>
+        </div>
     </div>
-    <div class="model">
-        <div id="model-2-name">Thomson's Plum Pudding</div>
-        <br>
-        <img class="model-2" src="assets/images/Thomson.png">
-        <div id="model-2-health">1904</div>
-    </div>
-    <div class="model">
-        <div id="model-3-name">Rutherford's Nuclear Model</div>
-        <br>
-        <img class="model-3" src="assets/images/Rutherford.png">
-        <div id="model-3-health">1911</div>
-    </div>
-    <div class="model">
-        <div id="model-4-name">Bohr's Planetary Model</div>
-        <br>
-        <img class="model-4" src="assets/images/Bohr.png">
-        <div id="model-4-health">1913</div>
+    <div class="row">
+        <div class="model-1">
+            <div id="model-1-name">Dalton's Solid Sphere</div>
+            <br>
+            <img class="model-1-img" src="assets/images/Dalton.png">
+            <div id="model-1-health">1803</div>
+        </div>
+        <div class="model-2">
+            <div id="model-2-name">Thomson's Plum Pudding</div>
+            <br>
+            <img class="model-2-img" src="assets/images/Thomson.png">
+            <div id="model-2-health">1904</div>
+        </div>
+        <div class="model-3">
+            <div id="model-3-name">Rutherford's Nuclear Model</div>
+            <br>
+            <img class="model-3-img" src="assets/images/Rutherford.png">
+            <div id="model-3-health">1911</div>
+        </div>
+        <div class="model-4">
+            <div id="model-4-name">Bohr's Planetary Model</div>
+            <br>
+            <img class="model-4-img" src="assets/images/Bohr.png">
+            <div id="model-4-health">1913</div>
+        </div>
     </div>
 
     <h3>Your Model</h3>
-    <h3>Models to Disprove</h3>
-    <h3>Experiment Section</h3>
+    <h3 id="disprove">Models to Disprove</h3>
+    <h3 id="expSection">Experiment Section</h3>
     <button type="button" class="btn btn-primary btn-lg">Begin Data Collection</button>
-    <h3>Defender</h3>
+    <h3 id="defender">Defender</h3>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+    <script src="assets/javascript/game.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
