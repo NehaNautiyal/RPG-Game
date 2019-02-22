@@ -5,13 +5,15 @@ $(document).ready(function () {
     //Declare some variables
 
     var m1hp = 1803;
-    var m2hp = 1905;
-    var m3hp;
-    var m4hp;
+    var m2hp = 1904;
+    var m3hp = 1911;
+    var m4hp = 1913;
 
     $(".model-1").on("click", function () {
         console.log("I am model 1.");
-        $("div").animate({right: '250px'});
+        $(".model-1").animate({
+            right: '250px'
+        });
     });
 
     $(".model-2").on("click", function () {
