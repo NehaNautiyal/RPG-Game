@@ -8,13 +8,13 @@ h1 {
     display: block;
     float: right;
     margin-right: 100px;
-    font-size: 5em;
+    font-size: 3em;
 }
 
 h3 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     color: whitesmoke;
-    font-size: 3em;
+    font-size: 2em;
     position: relative;
 }
 
@@ -39,13 +39,14 @@ h3 {
     position: relative;
     margin: 0 7px;
 }
-
-.model-1 {
-    margin-left: 20px;
+.model-1-img, .model-2-img, .model-3-img, .model-4-img {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-h3, .btn {
-    margin-left: 5px;
+.model-1, h3, #disprove, #expSection, .btn, #defender {
+    margin-left: 20px;
 }
 
 #model-1-name, #model-2-name, #model-3-name, #model-4-name {
@@ -58,4 +59,10 @@ h3, .btn {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     display: block;
     text-align: center;
+}
+
+#status {
+    color: white;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    margin-left: 300px;
 }
