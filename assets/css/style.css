@@ -66,3 +66,29 @@ h3 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     margin-left: 300px;
 }
+
+/* When a model is initially picked */
+.chosenModel {
+    border: 3px solid #64CFD2;
+    
+}
+
+.possibleDefender {
+    background: #64CFD2;
+    position: relative;
+    top: 290px;
+    right: 140px;
+
+}
+
+.chosenDefender {
+
+}
+
+.textRight {
+    position: relative;
+
+}
+
+
+
