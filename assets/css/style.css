@@ -18,7 +18,7 @@ h3 {
     position: relative;
 }
 
-.btn {
+.btn-experiment {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     border: teal;
     position: relative;
@@ -47,6 +47,7 @@ h3 {
 
 #model-1, h3, #disprove, #expSection, .btn, #defender {
     margin-left: 20px;
+    display: inline-block;
 }
 
 .model-name {
@@ -61,7 +62,7 @@ h3 {
     text-align: center;
 }
 
-#status {
+.status {
     color: white;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     margin-left: 300px;
@@ -75,16 +76,16 @@ h3 {
 
 .possibleDefender {
     background: #64CFD2;
-    position: relative;
-    top: 70px;
-    right: 140px;
+    /* position: relative; */
+    /* top: 50px;
+    right: 140px; */
 
 }
 
 .chosenDefender {
-    position: relative;
-    top: 135px;
-    left: 360px;
+    /* position: relative; */
+    /* top: 0px;
+    left: 400px; */
     background: plum;
     
 }
@@ -98,6 +99,16 @@ h4 {
     position: relative;
     bottom: 80px;
     left: 150px;
+}
+
+.zero-health {
+    background: red;
+}
+
+.reset-btn {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    border: teal;
+    position: relative;
 }
 
 
