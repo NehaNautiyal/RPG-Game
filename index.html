@@ -21,30 +21,32 @@
         </div>
     </div>
     <div class="row">
-        <div class="model-1">
-            <div id="model-1-name">Dalton's Solid Sphere</div>
+        <section id="models">
+        <div class="model" id="dalton">
+            <div class="model-name">Dalton's Solid Sphere</div>
             <br>
-            <img class="model-1-img" src="assets/images/Dalton.png">
-            <div id="model-1-health">1803</div>
+            <img class="model-img" src="assets/images/Dalton.png">
+            <div id="model-1-health" class="health" value="1803">1803</div>
         </div>
-        <div class="model-2">
-            <div id="model-2-name">Thomson's Plum Pudding</div>
+        <div  class="model" id="thomson">
+            <div class="model-name">Thomson's Plum Pudding</div>
             <br>
-            <img class="model-2-img" src="assets/images/Thomson.png">
-            <div id="model-2-health">1904</div>
+            <img class="model-img" src="assets/images/Thomson.png">
+            <div id="model-2-health" class="health" value="1904">1904</div>
         </div>
-        <div class="model-3">
-            <div id="model-3-name">Rutherford's Nuclear Model</div>
+        <div  class="model" id="rutherford">
+            <div class="model-name">Rutherford's Nuclear Model</div>
             <br>
-            <img class="model-3-img" src="assets/images/Rutherford.png">
-            <div id="model-3-health">1911</div>
+            <img class="model-img" src="assets/images/Rutherford.png">
+            <div id="model-3-health" class="health" value="1911">1911</div>
         </div>
-        <div class="model-4">
-            <div id="model-4-name">Bohr's Planetary Model</div>
+        <div  class="model" id="bohr">
+            <div class="model-name">Bohr's Planetary Model</div>
             <br>
-            <img class="model-4-img" src="assets/images/Bohr.png">
-            <div id="model-4-health">1913</div>
+            <img class="model-img" src="assets/images/Bohr.png">
+            <div id="model-4-health" class="health" value="1913">1913</div>
         </div>
+    </section>
     </div>
 
     <div class="row">
@@ -58,11 +60,15 @@
     </div>
     <div class="row">
         <button type="button" class="btn btn-primary btn-lg">Begin Data Collection</button>
+        <div id="reset-btn"></div>
     </div>
     <div class="row">
         <h3 id="defender">Defender:</h3>
     </div>
-    <div id="status"></div>
+    <section id="status">
+    <div id="status-chosenModel"></div>
+    <div id="status-chosenDefender"></div>
+</section>
 
 
 

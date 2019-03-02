@@ -30,26 +30,26 @@ h3 {
     border: teal;
 }
 
-.model-1, .model-2, .model-3, .model-4 {
+.model {
     border: 3px solid purple;
     overflow: auto;
     clear: both;
-    background: whitesmoke;
+    background: white;
     display: inline-block;
     position: relative;
     margin: 0 7px;
 }
-.model-1-img, .model-2-img, .model-3-img, .model-4-img {
+.model-img {
     display: flex;
     margin-left: auto;
     margin-right: auto;
 }
 
-.model-1, h3, #disprove, #expSection, .btn, #defender {
+#model-1, h3, #disprove, #expSection, .btn, #defender {
     margin-left: 20px;
 }
 
-#model-1-name, #model-2-name, #model-3-name, #model-4-name {
+.model-name {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     display: block;
     text-align: center;
@@ -76,18 +76,28 @@ h3 {
 .possibleDefender {
     background: #64CFD2;
     position: relative;
-    top: 290px;
+    top: 70px;
     right: 140px;
 
 }
 
 .chosenDefender {
-
+    position: relative;
+    top: 135px;
+    left: 360px;
+    background: plum;
+    
 }
 
 .textRight {
     position: relative;
 
+}
+
+h4 {
+    position: relative;
+    bottom: 80px;
+    left: 150px;
 }
 
 

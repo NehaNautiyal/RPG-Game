@@ -4,287 +4,321 @@ $(document).ready(function () {
 
     //Declare some variables
 
-    //Model# Data Points - starting point
-    var m1DataPts = 1803;
-    var m2DataPts = 1904;
-    var m3DataPts = 1911;
-    var m4dDataPts = 1913;
-
-    //Model# Data Power - increases incrementally
-    var m1DataPower = 150;
-    var m2DataPower = 200;
-    var m3DataPower = 300;
-    var m4DataPower = 270;
-
-    //Model# Counter Data Manipulation - never changes
-    var m1DataManip = 270;
-    var m2DataManip = 250;
-    var m3DataManip = 200;
-    var m4DataManip = 300;
-
-    var chosenModel = false;
-    var chosenDefender = false;
-    var defenderThere = false;
-//___________________________________________________________________________________________________________________________
-    var refreshPage = function () {
+    var modelInfo = {
+        model1: {
+            Name: "Dalton's Solid Sphere",
+            ID: "dalton",
+            Health: 1803,
+            Evidence: 150,
+            inconclusiveData: 270
+        },
+        model2: {
+            Name: "Thomson's Plum Pudding Model",
+            ID: "thomson",
+            Health: 1904,
+            Evidence: 200,
+            inconclusiveData: 250
+        },
+        model3: {
+            Name: "Rutherford's Nuclear Model",
+            ID: "rutherford",
+            Health: 1911,
+            Evidence: 300,
+            inconclusiveData: 200
+        },
+        model4: {
+            Name: "Bohr's Planetary Model",
+            ID: "bohr",
+            Health: 1913,
+            Evidence: 270,
+            inconclusiveData: 300
+        }
     }
 
-    var m1 = $(".model-1");
-    var m2 = $(".model-2");
-    var m3 = $(".model-3");
-    var m4 = $(".model-4");
+    var chosenModel = false;
+    var allPossibleDefenders = false;
+    var chosenDefender = false;
+    var allDefended = false;
+    var disproved = false;
+    var defendersLeft = 3;
+    var evidenceIncrementer = 1;
 
-    //When model 1 is picked as the chosen Model
-    m1.on("click", function () {
-        //Model 1 becomes the chosenModel
-        m1.addClass("chosenModel");
-        //Model 2 becomes "enemy"
-        m2.addClass("possibleDefender");
-        //Model 3 becomes "enemy"
-        m3.addClass("possibleDefender");
-        //Model 4 becomes "enemy"
-        m4.addClass("possibleDefender");
-        //Text moves to make space for the models 
-        $("#expSection").animate({
-            bottom: '290px',
-            left: '500px'
-        });
-        $(".btn").animate({
-            bottom: '290px',
-            left: '500px'
-        });
-        $("#defender").animate({
-            bottom: '290px',
-            left: '500px'
-        });
-        checkChosenModel();
+    //Initialize variables that will be updated later...
+    var chosenModelName;
+    var chosenModelHealth;
+    var chosenModelEvidence;
+    var chosenDefenderName;
+    var chosenDefenderHealth;
+    var chosenDefenderInconclusive;
+    //___________________________________________________________________________________________________________________________
+    var refreshPage = function () {
+
+        //Reset the Health of all Models
+        $('#model-1').find('.health').text('1803');
+        $('#model-2').find('.health').text('1904');
+        $('#model-3').find('.health').text('1911');
+        $('#model-4').find('.health').text('1913');
+
+        //Reset the Points of Evidence for each of the Models 
+        modelInfo.model1.Evidence = 150;
+        modelInfo.model2.Evidence = 200;
+        modelInfo.model3.Evidence = 300;
+        modelInfo.model4.Evidence = 270;
+
+        //Change text from Chosen Model to Choose a Model
+        $("#startingModel").text("Choose Your Model to begin:");
+
+        //Be sure there is nothing written in the status section
+        $("#status").empty();
+    }
+
+    var m1 = $("#model-1");
+    var m2 = $("#model-2");
+    var m3 = $("#model-3");
+    var m4 = $("#model-4");
+
+
+
+    //When ANY model is clicked, need to check if 
+    $(".model").on("click", function () {
+        var modelID = $(this).attr("id");
+        console.log(modelID + "was clicked");
+        //is there a chosen model? if not...
+        if (chosenModel === false) {
+            $(this).addClass("chosenModel");
+            chosenModel = true;
+            $("#expSection").animate({
+                bottom: '190px',
+                left: '600px'
+            });
+            $(".btn").animate({
+                bottom: '190px',
+                left: '600px'
+            });
+            $("#defender").animate({
+                bottom: '190px',
+                left: '600px'
+            });
+            //Change text to  Chosen Model
+            $("#startingModel").text("Chosen Model:");
+            // checkChosenModel();
+
+
+
+            console.log(this.id);
+            console.log(modelID);
+            if (allPossibleDefenders === false) {
+                $(".model").each(function () {
+                    if ($(this).attr("id") !== modelID) {
+                        $("#disprove").after(this);
+                        $(this).addClass("possibleDefender");
+                        // $(this).find(".model-name").removeClass("model-name").addClass("possibleDefender");
+                    }
+                });
+                allPossibleDefenders = true;
+            }
+        } else {
+            console.log(chosenDefender);
+            console.log(modelID);
+            //if model is already chosen, other models need to be disproved
+            if (chosenDefender === false) {
+                $(".possibleDefender").each(function () {
+                    if ($(this).attr("id") === modelID) {
+                        $("#experiment").append(this);
+                        $(this).removeClass("possibleDefender").addClass("chosenDefender");
+                    }
+                });
+
+                for (prop in modelInfo) {
+                    if (modelInfo[prop].ID === $(".chosenModel").attr("id")) {
+                        chosenModelName = modelInfo[prop].Name;
+                        chosenModelHealth = modelInfo[prop].Health;
+                        chosenModelEvidence = modelInfo[prop].Evidence;
+                        console.log(modelInfo[prop].ID);
+                    } else if (modelInfo[prop].ID === $(".chosenDefender").attr("id")) {
+                        chosenDefenderName = modelInfo[prop].Name;
+                        chosenDefenderHealth = modelInfo[prop].Health;
+                        chosenDefenderInconclusive = modelInfo[prop].inconclusiveData;
+                    }
+                }
+                chosenDefender = true;
+                
+                console.log("ChosenModelName: " + chosenModelName);
+                console.log("Chosen model health: " + chosenModelHealth);
+                console.log("Chosen Model evidence points: " + chosenModelEvidence);
+            }
+        }
+    });
+
+    $(".btn").on("click", function () {
+        if (allDefended || disproved) {
+            refreshPage();
+        }
+        else if (chosenDefender) {
+            var totalEvidence = chosenModelEvidence * evidenceIncrementer;
+            evidenceIncrementer++;
+            chosenModelHealth = chosenModelHealth - chosenDefenderInconclusive;
+            chosenDefenderHealth = chosenDefenderHealth - totalEvidence;
+            for (property in modelInfo) {
+                if (modelInfo[property].ID === $(".chosenModel").attr("id")) {
+                    modelInfo[property].Health = chosenModelHealth;
+                } else if (modelInfo[property].ID === $(".chosenDefender").attr("id")) {
+                    modelInfo[property].Health = chosenDefenderHealth
+                }
+                console.log()
+            }
+            $("#status-chosenModel").html('<h4>Your experiment has begun using' + totalEvidence + ' points of evidence.</h4>');
+            $("#status-chosenDefender").html('<h4>' chosenDefenderName' has intervened with  ' + chosenDefenderInconclusive + ' points of inconclusive data.</h4>');
+            $("[class*='chosenModel'] [class*='health']").text(chosenModelHealth);
+            $("[class*='chosenDefender'] [class*='health']").text(chosenDefenderHealth);
+
+            if (chosenModelHealth <= 0) {
+                disproved = true;
+                $(".chosenModel").removeClass("chosenModel").addClass("#zero-health");
+            }
+        }
     });
 
 
-// If any of the models have the chosenModel class, then chosenModel is true
-var checkChosenModel = function() {   
-if (m1.hasClass("chosenModel") ||
-    m2.hasClass("chosenModel") ||
-    m3.hasClass("chosenModel") ||
-    m4.hasClass("chosenModel")
-    ) {
-        chosenModel = true;
-        console.log("A model has been chosen: " + chosenModel);
-    }
-    else {
-        console.log("No model has been chosen.");
-        alert("You have not yet chosen a model.");
-    }
-}
-
-if (m2.hasClass("possibleDefender")) {
-        m2.on("click", function() {
-            chosenDefender = true;
-            console.log("Defender has been chosen: " + chosenDefender);
-            m2.addClass("chosenDefender");
-            m2.removeClass("possibleDefender");
-        });
-    } else if (m3.hasClass("possibleDefender")) {
-        m3.addClass("chosenDefender");
-        m3.removeClass("possibleDefender");
-    }
-
-    //In the beginning, nothing is chosen. Any model can be chosen at first = no class 
-    //Once any model is chosen, the clicked model = chosenModel and the other 3 = "chosenDefender"
-
-    if (m2.hasClass("chosenDefender") === true) {
-        chosenDefender = true;
-        defenderThere = true;
-    }
-    if (defenderThere === true) {
-        $(".btn").on("click", function () {
-            console.log("Experiment begin! Starting health: " + m1DataPts);
-            m1DataPts -= 250;
-            console.log(m2DataPts);
-            $("#model-1-health").text(m1DataPts);
-            m2DataPts -= m1DataPower;
-            $("#model-2-health").text(m2DataPts);
-            $("#status").html("Your experiment has begun to disprove the Plum Pudding model using " + m1DataPower + " data damage. Thomson experimented back for 250 data manipulation points.");
-            m1DataPower += 150;
-            // checkHealthOf1vs2();
-        });
-    } else {
-        $(".btn").on("click", function () {
-            alert("Pick a defender first, before you can begin your experiment.");
-        });
-    }
-
-    //if there is no model in the defender position, I want this to alert when the button is pressed
-    // $(".btn").on("click", function () {
-    //     alert("There is no model yet to disprove.")
-    // });
-
-    //When I click on Model 1 (Models 2, 3, 4, text, & buttons) move
-    // $(".model-1").on("click", function () {
-    //     console.log("I am model 1.");
-    //     //model-1 is going to move down
-    //     $(".model-2").animate({
-    //         top: '290px',
-    //         right: '140px'
-    //     });
-    //     $(".model-2").css('background', '#64CFD2');
-    //     $(".model-3").animate({
-    //         top: '290px',
-    //         right: '140px'
-    //     });
-    //     $(".model-3").css('background', '#64CFD2');
-    //     $(".model-4").animate({
-    //         top: '290px',
-    //         right: '140px'
-    //     });
-    //     $(".model-4").css('background', '#64CFD2');
-    //     $("#expSection").animate({
-    //         bottom: '290px',
-    //         left: '500px'
-    //     });
-    //     $(".btn").animate({
-    //         bottom: '290px',
-    //         left: '500px'
-    //     });
-    //     $("#defender").animate({
-    //         bottom: '290px',
-    //         left: '500px'
-    //     });
-    //     console.log("I can make anything move.");
-    //});
-    //Once Model1 is selected, then Models 2, 3, 4 need to be moved to Models to Disprove
-
-    // var checkHealthOf1vs2 = function () {
-    //     if (m2DataPts <= 0) {
-    //         $(".model-2").hide();
-    //         alert("You did it! You disproved Thomson's model!");
-    //     }
-    //     if (m1DataPts <= 0) {
-    //         alert("Thomson won! GAME OVER. Refresh the page to play again.");
-    //     }
-    // }
-
-    //Upon click of either Models 2, 3, 4, they must be moved to the Experiment section
-
-    // $(".model-2").on("click", function () {
-    //     $(".model-2").animate({
-    //         left: '360px',
-    //         top: '150px'
-    //     });
-    //     $(".model-2").css('background', 'plum');
-    // $(".model-3").animate({
-    //     left: '-275px',
-    // });
-    // $(".model-4").animate({
-    //     left: '-275px',
-    // });
-    //});
+        // //When model 1 is clicked
+        // m1.on("click", function () {
+        //     console.log("Model 1 has been clicked.");
+        //     //Change text to  Chosen Model
+        //     $("#startingModel").text("Chosen Model:");
+        //     //Model 1 becomes the chosenModel
+        //     m1.addClass("chosenModel");
+        //     //Model 2 becomes "enemy"
+        //     m2.addClass("possibleDefender");
+        //     //Model 3 becomes "enemy"
+        //     m3.addClass("possibleDefender");
+        //     //Model 4 becomes "enemy"
+        //     m4.addClass("possibleDefender");
+        //     //Text moves to make space for the models 
+        //     $("#expSection").animate({
+        //         bottom: '290px',
+        //         left: '500px'
+        //     });
+        //     $(".btn").animate({
+        //         bottom: '290px',
+        //         left: '500px'
+        //     });
+        //     $("#defender").animate({
+        //         bottom: '290px',
+        //         left: '500px'
+        //     });
+        //     checkChosenModel();
+        // });
 
 
+        // // If any of the models have the chosenModel class, then chosenModel is true
+        // var checkChosenModel = function () {
+        //     if (m1.hasClass("chosenModel") ||
+        //         m2.hasClass("chosenModel") ||
+        //         m3.hasClass("chosenModel") ||
+        //         m4.hasClass("chosenModel")
+        //     ) {
+        //         chosenModel = true;
+        //         console.log("A model has been chosen: " + chosenModel);
+        //     }
+        //     else {
+        //         console.log("No model has been chosen.");
+        //         alert("You have not yet chosen a model.");
+        //     }
+        // }
+
+        // m2.on("click", function () {
+        //     if (m2.hasClass("possibleDefender") &&
+        //         m3.hasClass("possibleDefender") &&
+        //         m4.hasClass("possibleDefender")) {
+        //         m2.addClass("chosenDefender");
+        //         m2.removeClass("possibleDefender");
+        //         checkChosenDefender()
+        //         console.log("Model 2 has been clicked.");
+        //     } else {
+        //     }
+        // });
+
+        // m3.on("click", function () {
+        //     if ($("[class*='chosenModel']") && m3.hasClass("possibleDefender")) {
+        //         m3.hasClass("chosenDefender");
+        //         m3.removeClass("possibleDefender");
+        //         chosenDefender = true;
+        //         console.log("Model 3 has been chosen as the defender.");
+        //     }
+        // });
+
+
+        // var checkChosenDefender = function () {
+        //     if (m2.hasClass("chosenDefender") ||
+        //         m3.hasClass("chosenDefender") ||
+        //         m4.hasClass("chosenDefender")) {
+        //         chosenDefender = true;
+        //         console.log("A defender has been chosen: " + chosenDefender);
+        //     } else
+        //         console.log("There is no model chosen to defend.");
+        // }
+
+
+        // //In the beginning, nothing is chosen. Any model can be chosen at first = no class 
+        // //Once any model is chosen, the clicked model = chosenModel and the other 3 = "chosenDefender"
+
+        // //Needs fixing- right now, only set for model 1 and model 2. What if another model is picked? Needs to be by class. the chosenModel's data points and the chosenDefender's model points needs to be edited accordingly
+        // $(".btn").on("click", function () {
+        //     // if (chosenModel === true && chosenDefender === true) {
+        //     //     console.log("Experiment begin! Starting health: " + m1DataPts);
+        //     //     m1DataPts -= 250;
+        //     //     console.log(m2DataPts);
+        //     //     $("#model-1-health").text(m1DataPts);
+        //     //     m2DataPts -= m1DataPower;
+        //     //     $("#model-2-health").text(m2DataPts);
+        //     //     $("#status").html(`'<h4>Your experiment has begun to disprove the Plum Pudding model using ${m1DataPower} points of evidence. <br>Thomson countered back with 250 points of inconclusive data.</h4>'`);
+        //     //     m1DataPower += 150;
+        //     //     checkHealth(m1DataPts, m2DataPts);
+        //     // } else {
+        //     //     alert("Pick a defender first, before you can begin your experiment.");
+        //     // }
+        //     runExperiment(model1.Health, model1.Evidence, model2.Health, model2.inconclusiveData);
+        // });
+
+        // //HEALTH = DATA POINTS = HEALTH
+        // //ATTACK POWER = DATA POWER = EVIDENCE
+        // //COUNTER ATTACK POWER = MANIPULATION = INCONCLUSIVE DATA
+
+
+        // function runExperiment(chosenModelHealth, chosenModelEvidence, defenderModelHealth, defenderModelInconclusiveData) {
+        //     if (chosenModel === true && chosenDefender === true) {
+        //         console.log("Experiment begin! Starting health: " + chosenModelHealth);
+        //         chosenModelHealth -= defenderModelInconclusiveData;
+        //         console.log(defenderModelHealth);
+        //         defenderModelHealth -= chosenModelEvidence;
+        //         $("#status").html(`'<h4>Your experiment has begun using ${chosenModelEvidence} points of evidence. <br>Defender countered back with ${defenderModelInconclusiveData} points of inconclusive data.</h4>'`);
+        //         chosenModelEvidence += 150;
+        //         checkHealth(chosenModelHealth, defenderModelHealth);
+        //         updateHealth(chosenModelHealth, defenderModelHealth);
+        //     } else {
+        //         alert("Pick a defender first, before you can begin your experiment.");
+        //     }
+        // }
+
+        // function updateHealth(chosenModelHealth, defenderModelHealth) {
+        //     $("[class*='chosenModel'] [class*='health']").text(chosenModelHealth);
+        //     $("[class*='chosenDefender'] [class*='health']").text(defenderModelHealth);
+        // }
+
+
+        // function checkHealth(chosenModelDataPoints, defenderModelDataPoints) {
+        //     if (chosenModelDataPoints <= 0) {
+        //         alert("You lost! Game Over!");
+        //         $("#reset-btn").html('<button type="button" class="btn btn-primary btn-lg">Reset Game</button>');
+        //     } else if (defenderModelDataPoints <= 0) {
+        //         $("[class*='chosenDefender']").hide();
+        //         $("[class*='chosenDefender']").removeClass("chosenDefender");
+        //         chosenDefender = false;
+        //         alert("You did it! You disproved the model! Pick another model to defend.");
+        //         $("#status").empty();
+        //     }
+        // }
 
 
 
-    // $(".model-2").on("click", function () {
-
-    // });
-    // $(".model-2").on("click", function () {
-
-    // });
-    //___________________________________________________________________________________________________________________________
-    //When Model 2 is clicked, Models 1,3,4,text & btn move
-
-    // $(".model-2").on("click", function () {
-    //     console.log("I am model 2.");
-    //     $(".model-2").animate({
-    //         right: '140px',
-    //     });
-    //     $(".model-1").animate({
-    //         top: '330px',
-    //     });
-    //     $(".model-1").css('background', '#64CFD2');
-    //     $(".model-3").animate({
-    //         top: '330px',
-    //         right: '148px'
-    //     });
-    //     $(".model-3").css('background', '#64CFD2');
-    //     $(".model-4").animate({
-    //         top: '330px',
-    //         right: '156px'
-    //     });
-    //     $(".model-4").css('background', '#64CFD2');
-    //     $("#expSection").animate({
-    //         top: '210px'
-    //     });
-    //     $(".btn").animate({
-    //         top: '210px'
-    //     });
-    //     $("#defender").animate({
-    //         top: '210px'
-    //     });
-    // });
-
-    // //___________________________________________________________________________________________________________________________
-    // //When Model 3 is clicked, Models 1,2,4,text & btn move
-
-    // $(".model-3").on("click", function () {
-    //     console.log("I am model 3.");
-    //     $(".model-3").animate({
-    //         right: '278px',
-    //     });
-    //     $(".model-1").animate({
-    //         top: '330px',
-    //     });
-    //     $(".model-1").css('background', '#64CFD2');
-    //     $(".model-2").animate({
-    //         top: '330px',
-    //     });
-    //     $(".model-2").css('background', '#64CFD2');
-    //     $(".model-4").animate({
-    //         top: '330px',
-    //         right: '148px'
-    //     });
-    //     $(".model-4").css('background', '#64CFD2');
-    //     $(".model-4").css('background', '#64CFD2');
-    //     $("#expSection").animate({
-    //         top: '210px'
-    //     });
-    //     $(".btn").animate({
-    //         top: '210px'
-    //     });
-    //     $("#defender").animate({
-    //         top: '210px'
-    //     });
-    // });
-    // //___________________________________________________________________________________________________________________________
-    // //When Model 4 is clicked, Models 1,2,3,text & btn move
-
-    // $(".model-4").on("click", function () {
-    //     console.log("I am model 4.");
-    //     $(".model-4").animate({
-    //         right: '432px',
-    //     });
-    //     $(".model-1").animate({
-    //         top: '330px',
-    //     });
-    //     $(".model-1").css('background', '#64CFD2');
-    //     $(".model-2").animate({
-    //         top: '330px',
-    //     });
-    //     $(".model-2").css('background', '#64CFD2');
-    //     $(".model-3").animate({
-    //         top: '330px',
-    //     });
-    //     $(".model-3").css('background', '#64CFD2');
-    //     $("#expSection").animate({
-    //         top: '210px'
-    //     });
-    //     $(".btn").animate({
-    //         top: '210px'
-    //     });
-    //     $("#defender").animate({
-    //         top: '210px'
-    //     });
-    // });
-
-    // If Begin Data collection is clicked, there is no model to disprove should be displayed
-});
+    });
