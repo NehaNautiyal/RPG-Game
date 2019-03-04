@@ -205,8 +205,8 @@ $(document).ready(function () {
             $(".models").append($("#status-chosenModel"));
             $(".models").append($("#status-chosenDefender"));
 
-            $("#status-chosenModel").html('<h4>Your experiment has begun using ' + totalEvidence + ' points of evidence.</h4>');
-            $("#status-chosenDefender").html('<h4>' + chosenDefenderName + ' has intervened with  ' + chosenDefenderInconclusive + ' points of inconclusive data.</h4><br><h4>Click Data Collection to continue.</h4>');
+            $("#status-chosenModel").html('<h4>Your experiment claims ' + totalEvidence + ' points of evidence.</h4>');
+            $("#status-chosenDefender").html('<h4>' + chosenDefenderName + ' counters with  ' + chosenDefenderInconclusive + ' points of inconclusive data.</h4><br><h4>Click Data Collection to continue.</h4>');
             $("[class*='chosenModel'] [class*='health']").text(chosenModelHealth);
             $("[class*='chosenDefender'] [class*='health']").text(chosenDefenderHealth);
 
