@@ -22,14 +22,20 @@ h3, #vs {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     border: teal;
     position: relative;
-    margin-left: 65px;
+    margin-left: 115px;
+    margin-bottom: 15px;
     
 }
 
 .btn, .btn-primary {
     background: plum;
     border: teal;
-    margin-left: 65px;
+    margin-left: 115px;
+    margin-bottom: 15px;
+}
+
+button {
+    margin-left: 115px;   
 }
 
 .model {
@@ -112,6 +118,8 @@ h4 {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     border: teal;
     position: relative;
+    margin-left: 115px;
+    margin-bottom: 15px;
 }
 
 
